@@ -62,7 +62,7 @@
       driver: { name: 'James Carter', handle: '@james_c', color: '#d9534f' },
       people: { dispatch: { name: 'Kamron (Leo)', handle: '@leo_disp2', color: '#4fae4e' }, updaters: { name: 'Nova Update', handle: '@nova_update', color: '#3f8fd2' } },
       pin: 'Trip 1173KQ9P2 · Columbus, OH → Newark, NJ',
-      hint: 'Look at the trip: the drop is in New Jersey, which has a 41 ft KPRA limit, so ask the driver to measure. Check the BOL weight: over 30,000 lb means a CAT scale. And there is only a sticker, so ask the dispatcher for the inspection paper.',
+      hint: 'Look at the trip: the drop is in New Jersey, which has a 41 ft KPRA limit, so ask the driver to measure. Check the BOL weight: over 30,000 lb means a certified scale. And there is only a sticker, so ask the dispatcher for the inspection paper.',
       intro: [
         T('dispatch', trip('1173KQ9P2', 'CMH4', 'Thu, 01:30 PM EST', '6050 Gateway Ct, Groveport, OH 43125', 'EWR9', 'Fri, 04:10 AM EST', '8003 Industrial Ave, Newark, NJ 07114', '1520.00', '536.20')),
         T('dispatch', '@fuelteam23'),
