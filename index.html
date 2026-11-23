@@ -885,7 +885,10 @@ ol.steps4 span{font-size:.9rem;color:var(--muted);line-height:1.45}
     </div>
 
     <h2>Practice on real BOLs</h2>
-    <div class="docs" data-set="bol-amazon,bol-homedepot"></div>
+    <div class="docs" data-set="bol-amazon,bol-homedepot,bol-central,bol-tforce,bol-tforce-manifest,bol-fedex-pro,bol-fedex-dispatch,bol-fedex-tally,bol-diversitech-2,bol-diversitech-4,bol-battery,bol-plunkett,bol-usps,bol-usps-hand,bol-trip"></div>
+    <div class="rule red"><b class="tag">Hazmat</b><div><b>Any hazmat: inform</b>, even 1 lb, even with "No placards required" or "LTD QTY". Our insurance does not cover it. Hazmat hides in different places: an X in the HM column, a UN number, a HAZ-MAT box, a manifest note, or a header.</div></div>
+    <div class="rule amber"><b class="tag">Every page</b><div>Many BOLs have several pages. Make sure the driver sent <b>every page</b>, and check each one.</div></div>
+    <div class="rule info"><b class="tag">Not always called a BOL</b><div>A USPS Contract Route Vehicle Record (PS Form 5398-A), a trip sheet, a manifest or a dispatch notice can all be the BOL.</div></div>
 
     <div class="rule amber"><b class="tag">Weight trap</b><div>On the Home Depot BOL, "TOTAL WEIGHT: 95.46 LBS" is only the <b>hazmat items</b>. The real load weight is further down: <b>27,477.7 lb</b>. Always look for the biggest "total" for the whole trailer.</div></div>
     <div class="lesson-foot"><a href="#inspection" class="btn ghost">← Back</a><button class="btn" data-done="bol">Mark done · Next lesson →</button></div>
@@ -1504,6 +1507,90 @@ const DOCS={
     {k:'Plate',v:'1020099ST',b:[63.5,11.3,8.5,1.9],t:'good',n:'Printed at the top right. ST = semi-trailer.'},
     {k:'VIN',v:'1DW1A5322TBC10617',b:[26,30.5,23,2.8],t:'good',mono:1},
     {k:'Receipt',v:'"CUSTOMER RECEIPT"',b:[34,88.5,22,3.5],t:'good'}]},
+ 'bol-central':{tab:'Central Transport',img:'img/bol-central.jpg',tone:'bad',
+   verdict:'<b>Inform: hazmat.</b> There is an <b>X in the H.M. column</b> (UN2794, wet batteries), even though it says "No placards required". Any hazmat, even 1 lb: inform. It is also 43,385 lb, so a CAT scale.',
+   fields:[
+    {k:'Hazmat',v:'X in H.M. · UN2794 batteries',b:[42,49.5,49,3],t:'bad',n:'Any X in the HM column is hazmat. Inform.'},
+    {k:'"No placards required"',v:'Does not matter',b:[62,45.5,28,5],t:'bad',n:'No placards does NOT mean no hazmat.'},
+    {k:'Total weight',v:'43,385 lb',b:[42,70.5,17,2.5],t:'warn',n:'Over 30,000: CAT scale.'},
+    {k:'Destination',v:'Latham, NY',b:[8,21,30,7],t:'good'},
+    {k:'Date',v:'10/30/2026',b:[7,8.5,20,2.5],t:'good'}]},
+ 'bol-tforce':{tab:'TForce contract BOL',img:'img/bol-tforce.jpg',tone:'bad',
+   verdict:'<b>Inform: hazmat.</b> The HAZ-MAT box says <b>YES</b>, even with placards "N/R". 24,567 lb, under 30,000.',
+   fields:[
+    {k:'Hazmat',v:'HAZ-MAT: YES',b:[13,33,14,3.5],t:'bad',n:'YES is ticked. Inform.'},
+    {k:'Placards',v:'N/R (not required)',b:[55,32.5,20,4],t:'bad',n:'Placards not required does not mean no hazmat.'},
+    {k:'Weight',v:'24,567 lb',b:[55,25,24,3.5],t:'good',n:'Under 30,000: no scale.'},
+    {k:'Destination',v:'Mechanicsburg, PA',b:[66,12,32,8],t:'good'}]},
+ 'bol-tforce-manifest':{tab:'TForce manifest',img:'img/bol-tforce-manifest.jpg',tone:'bad',
+   verdict:'<b>Inform: hazmat.</b> A manifest lists many shipments. Read the header: "THIS LOAD CONTAINS <b>1 SHIPMENT FLAGGED AS HAZARDOUS MATERIALS</b>". One is enough.',
+   fields:[
+    {k:'Hazmat',v:'1 shipment flagged as hazardous',b:[2,20,96,2.5],t:'bad',n:'One shipment out of 15 is enough. Inform.'},
+    {k:'Total weight',v:'24,567 lb',b:[40,23,24,2.5],t:'good'},
+    {k:'Date',v:'10/27/26',b:[78,7.5,20,2.5],t:'good'}]},
+ 'bol-fedex-pro':{tab:'FedEx pro',img:'img/bol-fedex-pro.jpg',tone:'bad',
+   verdict:'<b>Inform: hazmat.</b> "HAZARDOUS MATERIAL" is printed across the top and bottom, there is a red hazmat sticker, and an X in the HM column (UN1987).',
+   fields:[
+    {k:'Hazmat',v:'HAZARDOUS MATERIAL · UN1987',b:[8,13,85,6],t:'bad'},
+    {k:'HM column',v:'X',b:[32,56,8,6],t:'bad'},
+    {k:'Weight',v:'442 lb',b:[80,15,10,3],t:'good',n:'Small, but any hazmat counts.'}]},
+ 'bol-fedex-dispatch':{tab:'FedEx dispatch notice',img:'img/bol-fedex-dispatch.jpg',tone:'bad',
+   verdict:'<b>Inform: hazmat.</b> HAZ MAT: <b>Y</b>. Trailer weight 29,539 lb (under 30,000). Going to North Arlington, <b>NJ</b>: check KPRA (41 ft).',
+   fields:[
+    {k:'Hazmat',v:'HAZ MAT: Y',b:[1,32.5,36,3],t:'bad'},
+    {k:'Trailer weight',v:'29,539 lb',b:[1,28,36,2.5],t:'good',n:'Just under 30,000: no scale.'},
+    {k:'Destination',v:'North Arlington, NJ',b:[55,46,43,6],t:'warn',n:'NJ: KPRA limit 41 ft.'}]},
+ 'bol-fedex-tally':{tab:'FedEx loading tally',img:'img/bol-fedex-tally.jpg',tone:'warn',
+   verdict:'<b>Check every page.</b> This tally goes with the FedEx dispatch notice for the same trailer (FLSJ 63042). Total weight 29,539 lb. Ask for all the pages the driver has, and look for hazmat on each one.',
+   fields:[
+    {k:'Trailer',v:'FLSJ 63042',b:[4,21.5,32,4],t:'good',n:'Same trailer as the dispatch notice.'},
+    {k:'Total weight',v:'29,539 lb',b:[66,43,34,4.5],t:'good'},
+    {k:'Hazmat / placard',v:'Check the other pages',b:[42,32.5,30,5.5],t:'warn'}]},
+ 'bol-diversitech-2':{tab:'DiversiTech (page 2)',img:'img/bol-diversitech-2.jpg',tone:'bad',
+   verdict:'<b>Inform: hazmat.</b> Four lines have an <b>X in the HM column</b> (UN1805, UN2037, UN1993). "LTD QTY" (limited quantity) is still hazmat: our insurance does not cover any hazmat, even 1 lb.',
+   fields:[
+    {k:'Hazmat',v:'X in HM on 4 lines',b:[2,45,14,30],t:'bad',n:'Every X is hazmat. Inform.'},
+    {k:'"LTD QTY"',v:'Still hazmat',b:[14,45,30,30],t:'bad',n:'Limited quantity is still hazmat.'},
+    {k:'Page',v:'2 of several',b:[78,4,20,2.5],t:'warn',n:'Make sure every page was sent.'}]},
+ 'bol-diversitech-4':{tab:'DiversiTech (page 4)',img:'img/bol-diversitech-4.jpg',tone:'bad',
+   verdict:'<b>Inform: hazmat.</b> This page has no X in the HM column, but <b>page 2 of the same BOL does</b>. Always make sure every page was sent, and check each one.',
+   fields:[
+    {k:'HM column',v:'Empty on this page',b:[7,10,6,82],t:'warn',n:'Clean here, but not on page 2.'},
+    {k:'Page',v:'4 of several',b:[87,4,10,2.5],t:'warn',n:'Ask for all pages.'},
+    {k:'Footer',v:'// HAZMAT // emergency contact',b:[2,95,60,3],t:'bad',n:'The footer says HAZMAT too.'}]},
+ 'bol-battery':{tab:'Continental Battery',img:'img/bol-battery.jpg',tone:'bad',
+   verdict:'<b>Inform: hazmat.</b> UN2794 wet batteries with acid, 15 pallets. 43,751 lb is also over 30,000: CAT scale.',
+   fields:[
+    {k:'Hazmat',v:'UN2794 Batteries, Wet, Filled with Acid',b:[29,52,58,3],t:'bad',n:'A UN number means hazmat, even when the HM column is empty.'},
+    {k:'Weight',v:'43,751 lb',b:[4,52,25,3],t:'warn',n:'Over 30,000: CAT scale.'},
+    {k:'Destination',v:'Denver, CO',b:[2,19,35,6],t:'good'},
+    {k:'Date',v:'10/5/2026',b:[0,7,12,2.5],t:'good'}]},
+ 'bol-plunkett':{tab:'Plunkett',img:'img/bol-plunkett.jpg',tone:'bad',
+   verdict:'<b>Inform: hazmat.</b> The HAZMAT box is ticked on the first line (UN3501, chemical under pressure). 8,770 lb. Going to Medford, <b>NY</b>: KPRA 43 ft.',
+   fields:[
+    {k:'Hazmat',v:'Box ticked · UN3501',b:[14,22,40,7],t:'bad'},
+    {k:'Total weight',v:'8,770 lb',b:[74,52,15,3],t:'good'},
+    {k:'Destination',v:'Medford, NY',b:[24,14,36,7],t:'warn',n:'NY: KPRA limit 43 ft.'},
+    {k:'Date',v:'9/1/2026',b:[63,5.5,14,3],t:'good'}]},
+ 'bol-usps':{tab:'USPS card (printed)',img:'img/bol-usps.jpg',tone:'good',
+   verdict:'<b>OK.</b> A USPS mail load. The Contract Route Vehicle Record (PS Form 5398-A) is accepted as the BOL. Check the date, the seal and where it goes.',
+   fields:[
+    {k:'What is it?',v:'PS Form 5398-A',b:[2,79,30,6],t:'good',n:'USPS loads use this card.'},
+    {k:'Destination',v:'710 Shreveport',b:[72,16,26,5],t:'good'},
+    {k:'Seal',v:'0091476403',b:[2,70,48,8],t:'good'},
+    {k:'Date',v:'11/22/2026',b:[74,44,26,6],t:'good'}]},
+ 'bol-usps-hand':{tab:'USPS card (handwritten)',img:'img/bol-usps-hand.jpg',tone:'good',
+   verdict:'<b>OK.</b> The same USPS card, filled in by hand. Accepted as the BOL. Read the date, the seal and the destination carefully.',
+   fields:[
+    {k:'Destination',v:'Denwood',b:[80,14,20,9],t:'good'},
+    {k:'Seal',v:'0089057296',b:[24,76,40,12],t:'good'},
+    {k:'Date',v:'07/28/2026',b:[60,51,40,8],t:'good'}]},
+ 'bol-trip':{tab:'Trip sheet (phone)',img:'img/bol-trip.jpg',tone:'good',
+   verdict:'<b>OK.</b> A linehaul trip sheet, sent as a phone screenshot. Accepted as the BOL. Parcels, 18,470 lb (under 30,000). Going to Belleville, <b>MI</b>: KPRA 40 ft 6 in.',
+   fields:[
+    {k:'Package weight',v:'18,470.86 lb',b:[3,39.5,96,2.5],t:'good'},
+    {k:'Destination',v:'Belleville, MI',b:[3,14.5,96,2.5],t:'warn',n:'MI: KPRA 40 ft 6 in max, 37 ft 6 in min.'},
+    {k:'Product',v:'Parcels',b:[3,41.5,96,2.5],t:'good'}]},
  'bol-amazon':{tab:'Amazon BOL',img:'img/bol-amazon.jpg',tone:'good',
    verdict:'<b>OK.</b> No hazmat, 14,046 lb (under 30,000, so no CAT scale), Georgia has no KPRA rule on our list, and it is dated the day it was sent.',
    fields:[
@@ -1661,7 +1748,7 @@ const DOCS={
 };
 function renderDocs(el){
   const ids=el.dataset.set.split(','); let cur=ids[0];
-  const FOCUS={reg:['Plate','VIN','Expiry date'],insp:['Inspection date','Passed','VIN / unit # / plate'],stk:['Inspection date'],bol:['Total weight','Hazmat','Destination','Date'],scl:['Steer','Drive','Trailer','Gross']};
+  const FOCUS={reg:['Plate','VIN','Expiry date'],insp:['Inspection date','Passed','VIN / unit # / plate'],stk:['Inspection date'],bol:['Total weight','Hazmat','Destination','Date','Every page'],scl:['Steer','Drive','Trailer','Gross']};
   const fk=ids[0].split('-')[0], focusList=FOCUS[fk]||[];
   const focus=focusList.length?`<div class="focus-note"><span class="fn-ico">🎯</span><div><b>Only look for:</b> ${focusList.map(x=>`<span class="fchip">${x}</span>`).join('')}<p>${fk==='scl'?'Everything else (location, tractor and trailer numbers, fee, signature…) doesn\'t matter for the balance.':fk==='bol'?'Everything else (shipper, carrier, seal, pallets, barcodes…) doesn\'t matter for our check. From the destination you only need the <b>state</b>, for KPRA.':'Everything else on the paper (owner, address, state, make, model, fees, barcodes…) doesn\'t matter for our check. Skip it.'}</p></div></div>`:'';
   el.innerHTML='<div class="stack">'+focus+'<div class="docs-tabs" role="tablist"></div><div class="viewer"><div class="docimg"><img alt=""></div><div class="stack"><div class="verdict"></div><div class="fields"></div><p class="hint">Click the picture to zoom.</p></div></div></div>';
@@ -1875,6 +1962,11 @@ const Q=[
  {t:'Trailer',q:'On a swing door, one hinge is missing two bolts.',a:['OK if the door closes','Inform: the hinges must be fully secured'],c:1,e:'Swing door hinges: every hinge tight, no missing bolts.'},
  {t:'Trailer',q:'In the video you see a crack in the side wall of the trailer.',a:['OK if it is small','Inform: no cracks anywhere on the body'],c:1,e:'The body (walls, roof, front) must have no cracks.'},
  {t:'Trailer types',img:'img/tt-roll-up.jpg',q:'The trailer has a roll-up door and it is empty. The driver will load it at the shipper.',a:['OK, same as a swing door','Inform: we take roll-up door trailers only if they are pre-loaded'],c:1,e:'Roll-up door trailers: only if pre-loaded.'},
+ {t:'Papers',img:'img/bol-central.jpg',q:'This BOL says "NO PLACARDS REQUIRED". Is it hazmat?',a:['No, no placards means no hazmat','Yes: there is an X in the H.M. column (UN2794). Inform'],c:1,e:'An X in the HM column is hazmat, placards or not. Any hazmat: inform.'},
+ {t:'Papers',img:'img/bol-diversitech-2.jpg',q:'The hazmat lines say "LTD QTY" (limited quantity). What do you do?',a:['Nothing, limited quantity is fine','Inform: it is still hazmat, and our insurance does not cover any hazmat'],c:1,e:'Any hazmat, even 1 lb or LTD QTY: inform.'},
+ {t:'Papers',img:'img/bol-diversitech-4.jpg',q:'The driver sends page 4 of a BOL. No X in the HM column on it.',a:['OK, no hazmat','Make sure every page was sent: hazmat can be on another page'],c:1,e:'Page 2 of this BOL had hazmat. Always check every page.'},
+ {t:'Papers',img:'img/bol-tforce-manifest.jpg',q:'A manifest with 15 shipments says "1 SHIPMENT FLAGGED AS HAZARDOUS MATERIALS".',a:['OK, it is only 1 of 15','Inform: one hazmat shipment is enough'],c:1,e:'One is enough. Inform.'},
+ {t:'Papers',img:'img/bol-usps.jpg',q:'For a USPS mail load the driver sends this card (PS Form 5398-A).',a:['Ask for a real BOL','Accept it as the BOL'],c:1,e:'The USPS Contract Route Vehicle Record is accepted as the BOL.'},
  {t:'Papers',q:'There is a hazmat placard on the trailer, but the BOL shows no hazmat.',a:['Inform','Ignore it, the BOL wins'],c:0,e:'"No placards attached" is on the checklist. A placard that doesn\'t match the BOL must be reported.'}
 ];
 const TOPICS=['All',...new Set(Q.map(x=>x.t))];
