@@ -315,6 +315,16 @@ pre.msg{white-space:pre-wrap;font-family:var(--mono);font-size:.88rem;background
 .zoom img{max-height:92vh;max-width:100%;border-radius:8px}
 .kbd{font-family:var(--mono);font-size:.85em;background:var(--sunken);border:1px solid var(--line);border-radius:4px;padding:0 5px}
 .sheet{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
+#v-cheatsheet{position:fixed;top:72px;right:0;bottom:0;width:min(480px,100vw);z-index:35;background:var(--bg);border-left:1px solid var(--line);box-shadow:-14px 0 40px rgba(0,0,0,.14);overflow-y:auto;overscroll-behavior:contain;padding:0 max(18px,env(safe-area-inset-right,0px)) calc(40px + env(safe-area-inset-bottom,0px)) 18px;transform:translateX(105%);visibility:hidden;transition:transform .25s ease,visibility 0s linear .25s}
+body.sheet-open #v-cheatsheet{transform:none;visibility:visible;transition:transform .25s ease}
+#v-cheatsheet .sheet-bar{position:sticky;top:0;z-index:3;background:var(--bg);display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 0 12px;margin-bottom:10px;border-bottom:1px solid var(--line)}
+#v-cheatsheet .sheet-bar h1{font-size:1.5rem;margin:2px 0 0}
+#v-cheatsheet .sheet-x{color:var(--ink);background:var(--surface);border:1px solid var(--line);font-size:1rem;flex:none}
+#v-cheatsheet .sheet,#v-cheatsheet .live-body{grid-template-columns:minmax(0,1fr)}
+#v-cheatsheet .live-side{position:static}
+@media (min-width:1240px){body.sheet-open .shell{margin-right:480px;max-width:calc(100vw - 480px)}}
+body.no-sheet a[href="#cheatsheet"]{display:none!important}
+@media (prefers-reduced-motion:reduce){#v-cheatsheet{transition:none}}
 .sheet .card h3{margin-bottom:8px}
 .sheet .card{padding:16px 18px}
 .sheet ul{font-size:.92rem}
@@ -662,23 +672,23 @@ ol.steps4 span{font-size:.9rem;color:var(--muted);line-height:1.45}
   <nav class="rail" aria-label="Lessons">
     <div class="prog-card"><div class="prog-ring"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" class="trk"/><circle cx="18" cy="18" r="15.5" class="val" id="progRing"/></svg><b id="progPct">0%</b></div><div><b>Your progress</b><span id="progText">0 of 10 lessons done</span></div></div>
     <div class="grp">Start</div>
-    <a href="#start" data-l="start"><span class="n">1</span><span class="t">The job</span></a>
+    <a href="#start" data-l="start"><span class="n">◆</span><span class="t">The job</span></a>
     <div class="grp">Paperwork</div>
-    <a href="#registration" data-l="registration"><span class="n">2</span><span class="t">Registration</span></a>
-    <a href="#inspection" data-l="inspection"><span class="n">3</span><span class="t">Annual inspection</span></a>
-    <a href="#bol" data-l="bol"><span class="n">4</span><span class="t">Bill of lading</span></a>
-    <a href="#scale" data-l="scale"><span class="n">5</span><span class="t">Scale tickets</span></a>
+    <a href="#registration" data-l="registration"><span class="n">1</span><span class="t">Registration</span></a>
+    <a href="#inspection" data-l="inspection"><span class="n">2</span><span class="t">Annual inspection</span></a>
+    <a href="#bol" data-l="bol"><span class="n">3</span><span class="t">Bill of lading</span></a>
+    <a href="#scale" data-l="scale"><span class="n">4</span><span class="t">Scale tickets</span></a>
     
     <div class="grp">Route rules</div>
-    <a href="#kpra" data-l="kpra"><span class="n">6</span><span class="t">KPRA &amp; California</span></a>
+    <a href="#kpra" data-l="kpra"><span class="n">5</span><span class="t">KPRA &amp; California</span></a>
     <div class="grp">The trailer</div>
     <a href="#trailers" data-l="trailers"><span class="n">◆</span><span class="t">Trailer types</span></a>
-    <a href="#video" data-l="video"><span class="n">7</span><span class="t">Walkaround video</span></a>
-    <a href="#chassis" data-l="chassis"><span class="n">8</span><span class="t">Chassis</span></a>
+    <a href="#video" data-l="video"><span class="n">6</span><span class="t">Walkaround video</span></a>
+    <a href="#chassis" data-l="chassis"><span class="n">7</span><span class="t">Chassis</span></a>
     <div class="grp">Act and practice</div>
-    <a href="#inform" data-l="inform"><span class="n">9</span><span class="t">Inform &amp; call driver</span></a>
-    <a href="#practice" data-l="practice"><span class="n">10</span><span class="t">Practice test</span></a>
-    <a href="#simulator" data-l="simulator"><span class="n">11</span><span class="t">Group chat simulator</span></a>
+    <a href="#inform" data-l="inform"><span class="n">8</span><span class="t">Inform &amp; call driver</span></a>
+    <a href="#practice" data-l="practice"><span class="n">9</span><span class="t">Practice test</span></a>
+    <a href="#simulator" data-l="simulator"><span class="n">10</span><span class="t">Group chat simulator</span></a>
     <div class="grp">Keep open</div>
     <a href="#cheatsheet" data-l="cheatsheet"><span class="n">★</span><span class="t">Cheat sheet</span></a>
   </nav>
@@ -688,14 +698,14 @@ ol.steps4 span{font-size:.9rem;color:var(--muted);line-height:1.45}
   <section class="view" id="v-start">
     <div class="hero">
       <div class="hero-main">
-        <span class="pill">Course · 11 lessons</span>
+        <span class="pill">Course · 10 lessons</span>
         <h1>Learn to check a trailer, step by step</h1>
         <p class="lede">Drivers send us photos of their paperwork and a video of the trailer. You check both and decide: is everything OK, or is something wrong? No trucking experience needed. Every lesson uses real papers and real videos from the job.</p>
         <div class="hero-cta"><a class="btn big" id="continueBtn" href="#registration">Start the course →</a><a class="btn ghost" href="#video">▶ Watch the animated guide</a><span class="hint" id="continueHint"></span></div>
       </div>
       <div class="hero-side">
         <div class="ring-lg"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" class="trk"/><circle cx="18" cy="18" r="15.5" class="val" id="homeRing"/></svg><div><b id="homePct">0%</b><span>complete</span></div></div>
-        <p class="hint" id="homeDone">0 of 11 lessons done</p>
+        <p class="hint" id="homeDone">0 of 10 lessons done</p>
       </div>
     </div>
 
@@ -752,13 +762,13 @@ ol.steps4 span{font-size:.9rem;color:var(--muted);line-height:1.45}
       <tr><td><b>Glad hands</b></td><td>The two metal connectors where the air lines hook up (red and blue).</td></tr>
       <tr><td><b>DOT tape</b></td><td>The red and white reflective strip along the sides and back of the trailer.</td></tr>
     </table></div>
-    <div class="lesson-foot"><span class="hint">Ready? The first real lesson is about registrations.</span><button class="btn" data-done="start">Mark done · Next lesson →</button></div>
+    <div class="lesson-foot"><span class="hint">Ready? The first real lesson is about registrations.</span><a class="btn" href="#registration">Start: Registration →</a></div>
     <p class="reset-row"><button type="button" class="btn ghost" id="resetProgress">Reset my progress</button><span class="hint" id="resetNote">Clears your finished lessons, practice score and simulator results on this computer.</span></p>
   </section>
 
   <!-- ============ 2 REGISTRATION ============ -->
   <section class="view" id="v-registration" hidden>
-    <header class="lhead"><span class="lico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4z"/><circle cx="9" cy="11" r="2"/><path d="M6.5 15.5c.6-1.4 1.6-2 2.5-2s1.9.6 2.5 2M14 10h4M14 13h3"/></svg></span><div class="lhead-body"><div class="lesson-meta"><span class="pill">Lesson 2 of 11</span><span>Paperwork</span></div>
+    <header class="lhead"><span class="lico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4z"/><circle cx="9" cy="11" r="2"/><path d="M6.5 15.5c.6-1.4 1.6-2 2.5-2s1.9.6 2.5 2M14 10h4M14 13h3"/></svg></span><div class="lhead-body"><div class="lesson-meta"><span class="pill">Lesson 1 of 10</span><span>Paperwork</span></div>
     <h1>Trailer registration</h1>
     <p class="lede">Every state's registration looks different. Don't worry about the layout. You are always hunting for the same three things.</p>
     <div class="keypoints"><span class="kicker">Key points</span><ul><li><span>Check 3 things: <b>plate</b>, <b>VIN</b> and <b>expiry date</b>.</span></li><li><span>"NO EXPIRY" or "PERMANENT" means it is valid.</span></li><li><span>A <b>temporary permit</b>: valid until its date, and <b>inform</b> about the expiration date.</span></li><li><span><b>No plate: it can't roll</b>, in any situation.</span></li><li><span>Expired, or the expiry can't be read: <b>inform</b> or ask for a clearer photo.</span></li></ul></div></div></header>
@@ -814,7 +824,7 @@ ol.steps4 span{font-size:.9rem;color:var(--muted);line-height:1.45}
 
   <!-- ============ 3 INSPECTION ============ -->
   <section class="view" id="v-inspection" hidden>
-    <header class="lhead"><span class="lico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4h8v3H8zM6 5.5H5v15h14v-15h-1"/><path d="M9 13l2 2 4-4"/></svg></span><div class="lhead-body"><div class="lesson-meta"><span class="pill">Lesson 3 of 11</span><span>Paperwork</span></div>
+    <header class="lhead"><span class="lico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4h8v3H8zM6 5.5H5v15h14v-15h-1"/><path d="M9 13l2 2 4-4"/></svg></span><div class="lhead-body"><div class="lesson-meta"><span class="pill">Lesson 2 of 10</span><span>Paperwork</span></div>
     <h1>Annual inspection</h1>
     <p class="lede">Every trailer needs a safety inspection once a year. The driver shows it to you as a paper, a sticker on the trailer, or both.</p>
     <div class="keypoints"><span class="kicker">Key points</span><ul><li><span>Dated within the <b>last 12 months</b>.</span></li><li><span>It must show the trailer <b>passed</b>.</span></li><li><span>Match the paper to the trailer: VIN, unit # or plate.</span></li><li><span>On a <b>sticker</b>, only the <b>date</b> matters.</span></li><li><span>The <b>manufacturer plate</b> is only needed when you have to check the VIN, not every time.</span></li><li><span>A valid <b>sticker</b> means it can roll, but we still need the <b>paper</b>: ask dispatch or the updaters to request it from the broker.</span></li></ul></div></div></header>
@@ -859,7 +869,7 @@ ol.steps4 span{font-size:.9rem;color:var(--muted);line-height:1.45}
 
   <!-- ============ 4 BOL ============ -->
   <section class="view" id="v-bol" hidden>
-    <header class="lhead"><span class="lico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8l8-4 8 4v8l-8 4-8-4z"/><path d="M4 8l8 4 8-4M12 12v8"/></svg></span><div class="lhead-body"><div class="lesson-meta"><span class="pill">Lesson 4 of 11</span><span>Paperwork</span></div>
+    <header class="lhead"><span class="lico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8l8-4 8 4v8l-8 4-8-4z"/><path d="M4 8l8 4 8-4M12 12v8"/></svg></span><div class="lhead-body"><div class="lesson-meta"><span class="pill">Lesson 3 of 10</span><span>Paperwork</span></div>
     <h1>Bill of lading (BOL)</h1>
     <p class="lede">The BOL tells you what's inside the trailer. Every company prints it differently, so again you hunt for the same four things.</p>
     <div class="keypoints"><span class="kicker">Key points</span><ul><li><span>Over <b>30,000 lb</b>: the driver goes to a CAT scale.</span></li><li><span>Any <b>hazmat</b>: inform right away.</span></li><li><span>Note the destination state for KPRA, and check the date is today.</span></li><li><span>Empty trailer: no BOL needed.</span></li></ul></div></div></header>
@@ -884,7 +894,7 @@ ol.steps4 span{font-size:.9rem;color:var(--muted);line-height:1.45}
   <!-- ============ 5 KPRA ============ -->
   <!-- ============ 5 SCALE ============ -->
   <section class="view" id="v-scale" hidden>
-    <header class="lhead"><span class="lico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M5 21h14"/><path d="M4 7h16"/><path d="M7 7l-3 7a3 3 0 0 0 6 0zM17 7l-3 7a3 3 0 0 0 6 0z"/></svg></span><div class="lhead-body"><div class="lesson-meta"><span class="pill">Lesson 5 of 11</span><span>Paperwork</span></div>
+    <header class="lhead"><span class="lico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M5 21h14"/><path d="M4 7h16"/><path d="M7 7l-3 7a3 3 0 0 0 6 0zM17 7l-3 7a3 3 0 0 0 6 0z"/></svg></span><div class="lhead-body"><div class="lesson-meta"><span class="pill">Lesson 4 of 10</span><span>Paperwork</span></div>
     <h1>Scale tickets: balance the axles</h1>
     <p class="lede">Every load over 30,000 lb goes to a CAT scale. If one axle is over its limit and the gross is under 80,000, the driver can fix it by sliding. Your job is to read the ticket and tell the driver exactly what to slide.</p>
     <div class="keypoints"><span class="kicker">Key points</span><ul><li><span>Limits: steer <b>12,000</b> · drive <b>34,000</b> · trailer <b>34,000</b> · gross <b>80,000</b>.</span></li><li><span>Always slide the <b>tandems first</b>. The fifth wheel only if needed.</span></li><li><span>Steer over and the fifth wheel can't slide: ask for the <b>driver door sticker</b> photo, and check the state's max steer weight. <b>The lower one counts.</b></span></li><li><span><b>Check the fuel level first.</b> Diesel ≈ 7.1 lb/gal; 200 gal ≈ 1,420 lb on the drives. Low fuel: leave room. Full tank and legal: leave it as it is.</span></li><li><span>Can't slide any more to make room? <b>Tag the fuel team</b> with a max fuel level.</span></li><li><span>Tandems can't slide, or gross over 80,000: <b>inform</b>. The load goes back to the shipper to be restacked.</span></li></ul></div></div></header>
@@ -952,7 +962,7 @@ ol.steps4 span{font-size:.9rem;color:var(--muted);line-height:1.45}
   </section>
 
   <section class="view" id="v-kpra" hidden>
-    <header class="lhead"><span class="lico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 15l12-12 6 6-12 12z"/><path d="M7 11l2 2M10 8l2 2M13 5l2 2"/></svg></span><div class="lhead-body"><div class="lesson-meta"><span class="pill">Lesson 6 of 11</span><span>Route rules</span></div>
+    <header class="lhead"><span class="lico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 15l12-12 6 6-12 12z"/><path d="M7 11l2 2M10 8l2 2M13 5l2 2"/></svg></span><div class="lhead-body"><div class="lesson-meta"><span class="pill">Lesson 5 of 10</span><span>Route rules</span></div>
     <h1>KPRA and California</h1>
     <p class="lede">Some states limit how far the back wheels can be from the kingpin (where the trailer hooks onto the truck). The destination on the BOL tells you if this matters.</p>
     <div class="keypoints"><span class="kicker">Key points</span><ul><li><span>Find the destination state on the BOL.</span></li><li><span>State on the list: ask the driver to measure <b>kingpin to center of the last axle</b>.</span></li><li><span>Over the limit: <b>inform</b>. The tandems can usually slide.</span></li><li><span>Going to or in California without side skirts: just inform.</span></li></ul></div></div></header>
@@ -998,16 +1008,6 @@ ol.steps4 span{font-size:.9rem;color:var(--muted);line-height:1.45}
       <p><b>How we use it:</b> the last miles to a warehouse are usually on smaller roads, so check against <b>42 ft 6 in</b>. Between 42 ft 6 in and 45 ft 6 in: inform, so dispatch can check the route. Over 45 ft 6 in: inform, it is over on every road.</p>
     </div>
 
-    <h2>Try it: KPRA checker</h2>
-    <div class="card stack checker">
-      <div class="form">
-        <label class="f">Destination state<select id="kState"></select></label>
-        <label class="f">Measured feet<input id="kFt" type="number" min="0" max="60" placeholder="e.g. 41"></label>
-        <label class="f">Inches<input id="kIn" type="number" min="0" max="11" placeholder="e.g. 6"></label>
-      </div>
-      <div id="kOut" class="result"></div>
-    </div>
-
     <h2>California: two rules</h2>
     <div class="grid2">
       <div class="card ca"><span class="ca-n">40 ft</span><h3>KPRA limit</h3><p>The strictest state. Measure kingpin to the center of the last axle.</p></div>
@@ -1018,7 +1018,7 @@ ol.steps4 span{font-size:.9rem;color:var(--muted);line-height:1.45}
 
   <!-- ============ 6 VIDEO ============ -->
   <section class="view" id="v-video" hidden>
-    <header class="lhead"><span class="lico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9.5v5l4.5-2.5z"/></svg></span><div class="lhead-body"><div class="lesson-meta"><span class="pill">Lesson 7 of 11</span><span>The trailer</span></div>
+    <header class="lhead"><span class="lico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9.5v5l4.5-2.5z"/></svg></span><div class="lhead-body"><div class="lesson-meta"><span class="pill">Lesson 6 of 10</span><span>The trailer</span></div>
     <h1>The walkaround video</h1>
     <p class="lede">The driver walks around the trailer and films it. You watch and tick off each part. If you can't see something clearly, don't guess. Ask the driver to show it again.</p>
     <div class="keypoints"><span class="kicker">Key points</span><ul><li><span>Watch the whole walkaround, with the <b>light test on</b>.</span></li><li><span>Check tires, rims, brakes, air bags, lines, mudflaps and doors.</span></li><li><span>A part is missing or unclear: <b>ask or call the driver</b>.</span></li><li><span>Any issue: <b>inform</b>.</span></li></ul></div></div></header>
@@ -1031,18 +1031,16 @@ ol.steps4 span{font-size:.9rem;color:var(--muted);line-height:1.45}
       <button data-t="23.9"><span class="t">0:23</span>2 · The order we check</button>
       <button data-t="33.5"><span class="t">0:33</span>3 · Front: air lines, glad hands, clearance lights</button>
       <button data-t="57.9"><span class="t">0:57</span>4 · Catwalk: the 6 inch rule</button>
-      <button data-t="73.8"><span class="t">1:13</span>5 · Sides: DOT tape, lights, landing gear, side skirts</button>
+      <button data-t="73.8"><span class="t">1:13</span>5 · Sides: DOT tape, lights, landing gear, skirts, body</button>
       <button data-t="140.5"><span class="t">2:20</span>6 · Tires: tread, air pressure, rims and hubs</button>
       <button data-t="209.0"><span class="t">3:28</span>7 · Mudflaps</button>
       <button data-t="230.7"><span class="t">3:50</span>8 · Underneath: brakes, suspension, slider pins</button>
-      <button data-t="289.4"><span class="t">4:49</span>9 · Rear: light test, lights, plate, doors</button>
+      <button data-t="289.4"><span class="t">4:49</span>9 · Rear: light test, LED dots, plate, doors, hinges</button>
       <button data-t="355.7"><span class="t">5:55</span>10 · Reflective tape at the back</button>
       <button data-t="370.7"><span class="t">6:10</span>11 · Placards</button>
       <button data-t="389.5"><span class="t">6:29</span>12 · ABS light self-test</button>
-      <button data-t="400.3"><span class="t">6:40</span>13 · Container on a chassis: sides</button>
-      <button data-t="431.0"><span class="t">7:10</span>14 · Chassis rear: lights and locks</button>
-      <button data-t="470.4"><span class="t">7:50</span>15 · KPRA: kingpin to rear axle</button>
-      <button data-t="493.6"><span class="t">8:13</span>16 · Wrap-up: ask, inform, create the ticket</button>
+      <button data-t="400.3"><span class="t">6:40</span>13 · KPRA: kingpin to rear axle</button>
+      <button data-t="423.5"><span class="t">7:03</span>14 · Wrap-up: ask, inform, create the ticket</button>
     </div>
 
     <h2>The perfect PTI video</h2>
@@ -1214,16 +1212,17 @@ ol.steps4 span{font-size:.9rem;color:var(--muted);line-height:1.45}
 
   <!-- ============ CHASSIS ============ -->
   <section class="view" id="v-chassis" hidden>
-    <header class="lhead"><span class="lico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="9" rx="1"/><path d="M6 6v9M10 6v9M14 6v9M18 6v9"/><path d="M2 17h20"/><circle cx="17" cy="19" r="1.6"/><circle cx="7" cy="19" r="1.6"/></svg></span><div class="lhead-body"><div class="lesson-meta"><span class="pill">Lesson 8 of 11</span><span>The trailer</span></div>
+    <header class="lhead"><span class="lico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="9" rx="1"/><path d="M6 6v9M10 6v9M14 6v9M18 6v9"/><path d="M2 17h20"/><circle cx="17" cy="19" r="1.6"/><circle cx="7" cy="19" r="1.6"/></svg></span><div class="lhead-body"><div class="lesson-meta"><span class="pill">Lesson 7 of 10</span><span>The trailer</span></div>
     <h1>Container on a chassis</h1>
     <p class="lede">Some loads are a shipping container on a chassis. Check it the same way as a trailer (tires, brakes, mudflaps, DOT tape, light test). These are the differences.</p>
     <div class="keypoints"><span class="kicker">Key points</span><ul><li><span>Rear locks: twist lock head <b>horizontal</b> (vertical = not locked), lever to the front, pin <b>zip-tied</b>.</span></li><li><span>Front locks, both sides: lever down, pin zip-tied.</span></li><li><span>3 ID lights <b>above the plate</b>; front clearance <b>low</b> on the front corner.</span></li><li><span>Papers: in the holder at the front of the chassis, above the landing gear.</span></li></ul></div></div></header>
 
-    <h2>Watch the chassis part</h2>
-    <video aria-label="Animated guide: the perfect trailer check" id="animCh" class="wide-vid" src="video/animated-guide.mp4" poster="img/animated-guide.jpg" controls playsinline preload="metadata"></video>
+    <h2>Watch the chassis video</h2>
+    <video aria-label="Animated guide: the container chassis check" id="animCh" class="wide-vid" src="video/chassis-guide.mp4" poster="img/chassis-guide.jpg" controls playsinline preload="metadata"></video>
     <div class="chapters cols" data-video="animCh">
-      <button data-t="400.3"><span class="t">6:40</span>Chassis: sides, front locks, papers</button>
-      <button data-t="431.0"><span class="t">7:10</span>Chassis rear: lights and twist locks</button>
+      <button data-t="6.4"><span class="t">0:06</span>Chassis: sides, front locks, papers</button>
+      <button data-t="37.0"><span class="t">0:36</span>Chassis rear: lights and twist locks</button>
+      <button data-t="76.5"><span class="t">1:16</span>Wrap-up</button>
     </div>
 
     <h2>What is different on a chassis</h2>
@@ -1242,7 +1241,7 @@ ol.steps4 span{font-size:.9rem;color:var(--muted);line-height:1.45}
 
   <!-- ============ 7 INFORM ============ -->
   <section class="view" id="v-inform" hidden>
-    <header class="lhead"><span class="lico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10v4h3l6 4V6L7 10z"/><path d="M16.5 9a4 4 0 0 1 0 6M19 6.5a7.5 7.5 0 0 1 0 11"/></svg></span><div class="lhead-body"><div class="lesson-meta"><span class="pill">Lesson 9 of 11</span><span>Act and practice</span></div>
+    <header class="lhead"><span class="lico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10v4h3l6 4V6L7 10z"/><path d="M16.5 9a4 4 0 0 1 0 6M19 6.5a7.5 7.5 0 0 1 0 11"/></svg></span><div class="lhead-body"><div class="lesson-meta"><span class="pill">Lesson 8 of 10</span><span>Act and practice</span></div>
     <h1>Inform the right people, and call the driver</h1>
     <p class="lede">Finding a problem only helps if the right people hear about it. When you are sure there is an issue, tell the dispatcher or an updater so they can inform the broker. When you need something from the driver, ask or call.</p>
     <div class="keypoints"><span class="kicker">Key points</span><ul><li><span>Sure there is an issue? Tell the <b>dispatcher</b> or an <b>updater</b>, so they inform the broker.</span></li><li><span>Not sure? Ask in the group: the other teams will help.</span></li><li><span>Be short and specific: say exactly what is wrong.</span></li><li><span>Issues or not, create the ticket on the website.</span></li><li><span>Never write <b>gtg</b> in the group.</span></li></ul></div></div></header>
@@ -1289,7 +1288,7 @@ ol.steps4 span{font-size:.9rem;color:var(--muted);line-height:1.45}
 
   <!-- ============ 8 PRACTICE ============ -->
   <section class="view" id="v-practice" hidden>
-    <header class="lhead"><span class="lico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6v.6M12 17h.01"/></svg></span><div class="lhead-body"><div class="lesson-meta"><span class="pill">Lesson 10 of 11</span><span>Act and practice</span></div>
+    <header class="lhead"><span class="lico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6v.6M12 17h.01"/></svg></span><div class="lhead-body"><div class="lesson-meta"><span class="pill">Lesson 9 of 10</span><span>Act and practice</span></div>
     <h1>Practice test</h1>
     <p class="lede">Real situations from the job. Pick an answer to see if you're right and why. Practise one topic, or do them all: you pass at 80%. The questions come in a new order every time.</p></div></header>
     <div class="card" id="quiz"></div>
@@ -1298,7 +1297,7 @@ ol.steps4 span{font-size:.9rem;color:var(--muted);line-height:1.45}
   <!-- ============ 9 SIMULATOR ============ -->
   <section class="view" id="v-simulator" hidden>
     <div class="sim-head">
-      <div><div class="lesson-meta"><span class="pill">Lesson 11 of 11</span><span>Act and practice</span></div><h1>Group chat simulator</h1></div>
+      <div><div class="lesson-meta"><span class="pill">Lesson 10 of 10</span><span>Act and practice</span></div><h1>Group chat simulator</h1></div>
       <p class="lede">Six truck groups need a trailer check. Read what the driver and the PTI team send, ask for anything missing, and inform the right people. Never write gtg in the group: issues or not, you create the ticket on the Trailer Check website. Press Finish truck to get your score and feedback.</p>
     </div>
     <div class="sim" id="sim"></div>
@@ -1399,9 +1398,8 @@ ol.steps4 span{font-size:.9rem;color:var(--muted);line-height:1.45}
   </section>
 
   <!-- ============ CHEAT SHEET ============ -->
-  <section class="view" id="v-cheatsheet" hidden>
-    <div class="eyebrow">Keep this open while you work</div>
-    <h1>Cheat sheet</h1>
+  <section class="view" id="v-cheatsheet" aria-label="Cheat sheet" aria-hidden="true">
+    <div class="sheet-bar"><div><div class="eyebrow">Keep this open while you work</div><h1>Cheat sheet</h1></div><button type="button" class="icon-btn sheet-x" id="sheetClose" aria-label="Close the cheat sheet" title="Close (Esc)">✕</button></div>
     <div class="rule red"><b class="tag">Golden rule</b><div><strong>Not sure → ask the group. Sure there's an issue → tell the dispatcher or an updater to inform the broker. Nothing rolls with an open issue.</strong></div></div>
     <details class="card live" id="live" open>
       <summary><span class="live-h">Check a truck</span><span class="hint">Mark each part as you go. The messages write themselves.</span></summary>
@@ -1690,8 +1688,8 @@ $$('.docs').forEach(renderDocs);
 function zoom(src){const z=document.createElement('div');z.className='zoom';z.innerHTML=`<img src="${src}" alt="">`;z.onclick=()=>z.remove();document.addEventListener('keydown',function e(ev){if(ev.key==='Escape'){z.remove();document.removeEventListener('keydown',e)}});document.body.appendChild(z)}
 
 /* ---------- routing + progress ---------- */
-const LESSONS=['start','registration','inspection','bol','scale','kpra','video','chassis','inform','practice','simulator'];
-const ALL=[...LESSONS,'trailers','cheatsheet'];
+const LESSONS=['registration','inspection','bol','scale','kpra','video','chassis','inform','practice','simulator'];
+const ALL=['start',...LESSONS,'trailers','cheatsheet'];
 let done=new Set(store.get('ugl-done',[]));
 function paintProgress(){
   $$('.rail a').forEach(a=>a.classList.toggle('done',done.has(a.dataset.l)));
@@ -1699,24 +1697,34 @@ function paintProgress(){
   $('#progText').textContent=`${n} of ${LESSONS.length} lessons done`;$('#progPct').textContent=pct+'%';
   [['#progRing'],['#homeRing']].forEach(([id])=>{const r=$(id);if(r){r.style.strokeDasharray=C;r.style.strokeDashoffset=C*(1-n/LESSONS.length)}});
   if($('#homePct')){$('#homePct').textContent=pct+'%';$('#homeDone').textContent=`${n} of ${LESSONS.length} lessons done`}
-  const next=LESSONS.find(l=>l!=='start'&&!done.has(l));
+  const next=LESSONS.find(l=>!done.has(l));
   const tc=$('#topContinue');if(tc){tc.href=next?'#'+next:'#cheatsheet';tc.textContent=next?(n>0?'Continue →':'Start →'):'Cheat sheet →'}
   const cb=$('#continueBtn');if(cb){if(!next){cb.href='#cheatsheet';cb.textContent='Open the cheat sheet →';$('#continueHint').textContent='You finished every lesson 🎉'}
     else{const a=$(`.rail a[data-l="${next}"] .t`);cb.href='#'+next;cb.textContent=(n>0?'Continue: ':'Start: ')+(a?a.textContent:next)+' →'}}
-  const lc=$('#lessonCards');if(lc){lc.innerHTML=LESSONS.filter(l=>l!=='start').map(l=>{const a=$(`.rail a[data-l="${l}"]`);
+  const lc=$('#lessonCards');if(lc){lc.innerHTML=LESSONS.map(l=>{const a=$(`.rail a[data-l="${l}"]`);
     return `<a class="lcard ${done.has(l)?'done':''}" href="#${l}"><span class="n">${done.has(l)?'✓':a.querySelector('.n').textContent}</span><b>${a.querySelector('.t').innerHTML}</b></a>`}).join('')}
 }
+function sheetOpen(){return document.body.classList.contains('sheet-open')}
+function openSheet(){if(document.body.classList.contains('no-sheet'))return;const d=$('#v-cheatsheet');d.style.top=$('.top').getBoundingClientRect().bottom+'px';document.body.classList.add('sheet-open');d.setAttribute('aria-hidden','false');$$('.rail a[data-l="cheatsheet"],.icon-btn[href="#cheatsheet"]').forEach(a=>a.classList.add('on'))}
+function closeSheet(){document.body.classList.remove('sheet-open');$('#v-cheatsheet').setAttribute('aria-hidden','true');$$('.rail a[data-l="cheatsheet"],.icon-btn[href="#cheatsheet"]').forEach(a=>a.classList.remove('on'))}
 function route(){
-  let h=location.hash.replace('#','');if(!ALL.includes(h))h='start';
-  ALL.forEach(v=>{$('#v-'+v).hidden=v!==h});
+  let h=location.hash.replace('#','');
+  if(h==='cheatsheet'){const prev=store.get('ugl-last','start'),back=prev&&prev!=='cheatsheet'&&ALL.includes(prev)?prev:'start';history.replaceState(null,'','#'+back);openSheet();if(!$('#v-'+back).hidden)return;h=back}
+  if(!ALL.includes(h)||h==='cheatsheet')h='start';
+  ALL.forEach(v=>{if(v!=='cheatsheet')$('#v-'+v).hidden=v!==h});
+  document.body.classList.toggle('no-sheet',h==='practice');if(h==='practice')closeSheet();
   document.body.classList.toggle('wide',h==='simulator');
-  $$('.rail a').forEach(a=>a.classList.toggle('on',a.dataset.l===h));
+  $$('.rail a').forEach(a=>a.classList.toggle('on',a.dataset.l===h||(a.dataset.l==='cheatsheet'&&sheetOpen())));
   $$('.topnav a').forEach(a=>a.classList.toggle('on',a.dataset.sec.split(' ').includes(h)));
   store.set('ugl-last',h);
   window.scrollTo(0,0);
 }
 $$('[data-done]').forEach(b=>b.onclick=()=>{const l=b.dataset.done;done.add(l);store.set('ugl-done',[...done]);paintProgress();const i=LESSONS.indexOf(l);const t=$(`.rail a[data-l="${l}"] .t`);toast(`✓ ${t?t.textContent:'Lesson'} done · ${done.size>=LESSONS.length?'every lesson finished':LESSONS.filter(x=>done.has(x)).length+' of '+LESSONS.length}`);location.hash=LESSONS[i+1]||'cheatsheet'});
 window.addEventListener('hashchange',route);
+$$('a[href="#cheatsheet"].icon-btn,.rail a[data-l="cheatsheet"]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();sheetOpen()?closeSheet():openSheet()}));
+$('#sheetClose').onclick=closeSheet;
+addEventListener('keydown',e=>{if(e.key==='Escape'&&sheetOpen()&&$('#pal').hidden)closeSheet()});
+addEventListener('resize',()=>{if(sheetOpen())$('#v-cheatsheet').style.top=$('.top').getBoundingClientRect().bottom+'px'});
 if(!location.hash){const last=store.get('ugl-last',null);if(last&&ALL.includes(last))history.replaceState(null,'','#'+last)}
 
 /* ---------- scale balancer ---------- */
@@ -1779,25 +1787,7 @@ route();paintProgress();
 /* ---------- video chapters ---------- */
 $$('.chapters').forEach(ch=>{const v=$('#'+(ch.dataset.video||'walk'));if(!v)return;ch.querySelectorAll('button').forEach(b=>b.onclick=()=>{v.currentTime=+b.dataset.t;v.play().catch(()=>{});if(ch.dataset.video)v.scrollIntoView({behavior:'smooth',block:'center'})})});
 
-/* ---------- KPRA ---------- */
-const KP={CA:[480,null,'California'],MI:[486,450,'Michigan'],IL:[510,null,'Illinois'],CT:[516],IN:[516],ME:[516],MN:[516],NY:[516],WI:[516]};
-['AL','DC','FL','MD','NC','NH','NJ','PA','RI','SC','TN','VA','VT'].forEach(s=>KP[s]=[492]);
-const STATES='AL AK AZ AR CA CO CT DE DC FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI WY'.split(' ');
-const ks=$('#kState');ks.innerHTML=STATES.map(s=>`<option ${s==='NJ'?'selected':''}>${s}</option>`).join('');$('#kFt').value=42;$('#kIn').value=0;
-const fmt=i=>`${Math.floor(i/12)} ft${i%12?' '+(i%12)+' in':''}`;
-function kpra(){
-  const s=ks.value,ft=$('#kFt').value,inch=$('#kIn').value||0,o=$('#kOut'),r=KP[s];
-  const m=ft===''?null:(+ft)*12+(+inch);
-  if(!r){o.className='result good';o.innerHTML=`<strong>${s}: no KPRA rule on our list</strong>No KPRA check needed for this destination.`;return}
-  const max=r[0],min=r[1];
-  if(m===null){o.className='result warn';o.innerHTML=`<strong>${s} limit: ${fmt(max)}${min?` (minimum ${fmt(min)})`:''}</strong>Ask the driver to measure kingpin to the center of the last axle and send a photo.`;return}
-  let bad=m>max,low=min&&m<min;
-  if(s==='IL'&&m>max&&m<=546){o.className='result warn';o.innerHTML=`<strong>${fmt(m)}: over 42 ft 6 in → inform</strong>Allowed only on Class I/II roads (up to 45 ft 6 in). Inform so dispatch can check the route.`;return}
-  if(bad){o.className='result bad';o.innerHTML=`<strong>${fmt(m)} is over the ${s} limit of ${fmt(max)} → inform</strong>Ask the driver if they can slide the tandems forward. If it stays over, tell the dispatcher or an updater: it can't roll like this.`}
-  else if(low){o.className='result bad';o.innerHTML=`<strong>${fmt(m)} is under the Michigan minimum of ${fmt(min)} → inform</strong>Michigan needs at least 37 ft 6 in.`}
-  else{o.className='result good';o.innerHTML=`<strong>${fmt(m)}: within the ${s} limit of ${fmt(max)}</strong>OK. ${s==='CA'?'Also check side skirts for California.':''}`}
-}
-['#kState','#kFt','#kIn'].forEach(s=>$(s).addEventListener('input',kpra));kpra();
+
 
 /* ---------- message builder ---------- */
 const ISSUES=[
@@ -1896,13 +1886,13 @@ function quiz(){
   const chips=`<div class="qtopics" role="group" aria-label="Topic">${TOPICS.map(t=>`<button type="button" class="${t===topicSel?'on':''}" data-t="${t}">${t}${t==='All'?'':` <span>${Q.filter(x=>x.t===t).length}</span>`}</button>`).join('')}</div>`;
   const bindChips=()=>$$('.qtopics button',box).forEach(b=>b.onclick=()=>{topicSel=b.dataset.t;startQuiz()});
   if(qi>=n){const pct=Math.round(score/n*100),pass=pct>=80;
-    if(topicSel==='All'){const best=Math.max(score,store.get('ugl-best',0));store.set('ugl-best',best);if(pass){done.add('practice');store.set('ugl-done',[...done]);paintProgress()}}
+    if(topicSel==='All'){const best=Math.max(score,store.get('ugl-best',0));store.set('ugl-best',best);if(!done.has('practice')){done.add('practice');store.set('ugl-done',[...done]);paintProgress();toast('✓ Practice test done · it counts in your progress')}}
     const byT=[...new Set(order.map(i=>Q[i].t))].map(t=>{const all=order.filter(i=>Q[i].t===t),bad=miss.filter(i=>Q[i].t===t).length;return `<li><span>${t}</span><b>${all.length-bad} / ${all.length}</b></li>`}).join('');
     box.innerHTML=`<div class="stack">${chips}<div class="qnum">Your result${topicSel==='All'?'':' · '+topicSel}</div><div class="score">${score} / ${n} <small>${pct}%</small></div>
       <div class="result ${pass?'good':'warn'}"><strong>${pass?'Great job, you are ready to shadow a real check.':'Almost there. Look at the questions you missed, then try again.'}</strong>You pass at 80%.</div>
       <ul class="qby">${byT}</ul>
       ${miss.length?`<h3>Questions you missed</h3><ol class="qmiss">${miss.map(i=>`<li><b>${Q[i].q}</b><span>Answer: ${Q[i].a[Q[i].c]}</span><em>${Q[i].e}</em></li>`).join('')}</ol>`:''}
-      <div><button class="btn" id="qAgain">Try again</button> <a class="btn ghost" href="#cheatsheet">Open cheat sheet</a></div></div>`;
+      <div><button class="btn" id="qAgain">Try again</button> <a class="btn ghost" href="#simulator">Next: Group chat simulator →</a></div></div>`;
     bindChips();$('#qAgain').onclick=startQuiz;return}
   const it=Q[order[qi]];
   box.innerHTML=`<div class="stack">${chips}<div class="qnav"><span class="qnum">Question ${qi+1} of ${n} · ${it.t}</span><span class="qnum">Score ${score}</span></div><div class="qbar"><i style="width:${qi/n*100}%"></i></div>
